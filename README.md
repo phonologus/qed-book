@@ -24,14 +24,14 @@ is reasonably easy to learn-forget-relearn-reforget....
 
 The evolution of Rob's tutorial from his original `troff` manuscript
 through to the current `asciidoc` version can be tracked in the
-`git` history of my now obsolete first port of [_Qed_][Q].
+`git` history of my now obsolete first port of _Qed_ [here][Q].
 
-[Q:] https://github.com/phonologus/QED
+[Q]: https://github.com/phonologus/QED
 
-Readers wishing to play-along should download and install my current
-port of [_Qed_][R].
+Readers wishing to play-along should download and install my improved
+port of _Qed_ [here][R].
 
-[R:] https://github.com/phonologus/qed-new
+[R]: https://github.com/phonologus/qed-new
 
 Repository Notes
 ================
