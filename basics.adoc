@@ -1,0 +1,109 @@
+*Qed* is basically an interpreter for a cryptic programming language
+specialising in the transformation of lines of text. It makes few
+concessions to the human operator beyond what could be expected
+of a teletype machine.
+
+Using *Qed* interactively is like playing a game of chess where you can't
+see the board, unless you ask for a peek every now and then. It is not
+a way of working that everyone is comfortable with, and the history of
+text editors is largely the quest for a less demanding experience.
+To add to the difficulty, *Qed*'s language, and its responses are terse,
+and the impression is that of Babylonian cuneiform. However, once one
+has cultivated a familiarity with *Qed*'s ultra-compact expressiveness,
+one can start to see a mysterious beauty in it, and ultimately one comes
+to be able to read the runes quite fluently.
+
+To edit one or more files, *Qed* is summoned from the commandline with
+the filenames as arguments:
+
+[source]
+----
+qed *.c
+----
+
+*Qed* loads copies of these files,
+and stores each one into a _buffer_. Each buffer is assigned a _name_
+which is a single alphabetic character (`a`-`z` and `A`-`Z`)
+or one of the characters `{`,`|`,`}`, and `~`.
+
+The basic unit of organisation within a buffer is the _line_. *Qed*
+conceives of the content of a buffer as a sequence of lines of characters.
+At the most basic level, each line has a number, which is simply its
+ordinal in the sequence of lines, with the first line being `1`, the
+next line being `2`, and so on. As well as its ordinal, the last line
+in the buffer is also called `$` (_dollar_), and the _current line_ is
+called `.` (_dot_). *Qed* has a sophisticated language for describing
+which line (or range of lines) to do work on, and expressions in
+this language are called `addresses`. _Dot_ and _dollar_ are two such
+expressions. A line's ordinal is also a valid address.
+
+One of the simplest things you can ask *Qed* to do is to print out a
+line, or lines, of a buffer for you. You tell *Qed* to do things
+by issuing _commands_ in *Qed*'s command language. The commands are
+(with one exception) single characters. The command to tell *Qed*
+to print a line to the screen for you is `p`. Unless you tell it
+otherwise, *Qed* will print the line addressed by _dot_ in the
+current buffer. If you want to print a different line, you
+prefix the command with an address. This is the format for nearly
+all of *Qed*'s commands: `[optional address]character`. So,
+to print the first line of the buffer:
+
+[source]
+----
+1p
+----
+
+
+If you want *Qed* to print a _range_ of lines, you do that by prefixing
+the command with the address of the first line, followed by a comma `,`,
+followed by the address of the last line of the range. So, `3,11p` will
+tell *Qed* to print lines 3 through 11 inclusive to the screen.
+
+*Qed*'s command syntax makes great use of defaults. This is in part why
+its command language is so terse. We have already seen one example
+of this. The unadorned command `p` means _print the line addressed by dot_.
+We could also have said, equivalently, `.p`. All of *Qed*'s commands
+have well-defined defalut addresses, listed exhaustively in the manpage.
+Usually they are intuitive, the current line, _dot_, being the most
+common. A slightly weird exception is the `=` command, which prints the
+line number of its address. Rather than defaulting to _dot_, the `=`
+command's default address is `$`, the last line of the buffer, so that
+an unadorned `=` command prints the line number of the last line, which
+is handily equivalent to the number of lines in the buffer. To print
+the line number of the current line, we need to tell `=` explicitly `.=`.
+
+So, if *Qed* is expecting an address, but doesn't find one, it supplies
+a (well-defined) default. This works for the range operator `,` too.
+If the first address of a range is missing, *Qed* supplies `1`, the
+first line of the buffer. So, to print the first 10 lines a buffer,
+one can say `1,10p`, or `,10p`. If the second address of a range is
+missing, *Qed* supplies `$`, the last line of the buffer. So to print
+all but the first 10 lines, `10,p`. And of course we can omit both
+addresses and say `,p`, which *Qed* will interpret as `1,$p` : print
+every line. 
+
+So far, we have only seen _absolute_ addresses: a line's ordinal in the
+sequence of lines in the buffer. *Qed* also allows us to address lines
+_relatively_.
+
+Given any address expression, we can specify the _n_-th line after,
+or before, by suffixing the expression with `+`, or `-`, followed
+by a decimal number. `$-2` addresses the pre-penultimate line of the
+buffer. `.+10` addresses the tenth line on from the current line.
+An address in this form is itself an address expression, which can take
+an offset suffix, so `.+10-10` gets you back to _dot_ (not very useful!).
+
+As you might expect, *Qed* allows you to omit various parts of these
+expressions, and supplies (well-defined) defaults. If the base address
+is missing, *Qed* supplies _dot_. So `.+10` is more often written just
+`+10`. To print the ten lines following the current line: `+10p`.
+*Qed* also lets you leave out the offset, in which case it supplies the
+number `1`. Thus the address expression `+` by itself is
+equivalent to `.+1` (_i.e._ the next line on from _dot_), and `-` is
+equivalent to `.-1` (_i.e._ the line prior to _dot_).
+
+Remember that offset suffixes can be strung together (as `.+10-10` above)
+so we can refer to the line three lines prior to _dot_ as `---`,
+which *Qed* expands to `.-1-1-1`. Being address expressions, these are
+all perfectly valid addresses for each end of a range: to print
+the immediate context of the current line: `-,+p`
