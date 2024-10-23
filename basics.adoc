@@ -95,7 +95,7 @@ an offset suffix, so `.+10-10` gets you back to _dot_ (not very useful!).
 
 As you might expect, *Qed* allows you to omit various parts of these
 expressions, and supplies (well-defined) defaults. If the base address
-is missing, *Qed* supplies _dot_. So `.+10` is more often written just
+is missing, *Qed* supplies _dot_. So `.\+10` is more often written just
 `+10`. To print the ten lines following the current line: `+10p`.
 *Qed* also lets you leave out the offset, in which case it supplies the
 number `1`. Thus the address expression `+` by itself is
