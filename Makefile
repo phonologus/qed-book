@@ -16,6 +16,6 @@ all-pdf: qed-book.pdf basics.pdf
 clean:
 	rm -f *.html *.pdf
 
-git: all-html
+git: clean all-html
 	fossil git export
 
