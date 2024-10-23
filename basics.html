@@ -546,10 +546,10 @@ an offset suffix, so <code>.+10-10</code> gets you back to <em>dot</em> (not ver
 <div class="paragraph">
 <p>As you might expect, <strong>Qed</strong> allows you to omit various parts of these
 expressions, and supplies (well-defined) defaults. If the base address
-is missing, <strong>Qed</strong> supplies <em>dot</em>. So <code>.10` is more often written just
-`+10`. To print the ten lines following the current line: `+10p`.
-*Qed* also lets you leave out the offset, in which case it supplies the
-number `1`. Thus the address expression `</code> by itself is
+is missing, <strong>Qed</strong> supplies <em>dot</em>. So <code>.+10</code> is more often written just
+<code>+10</code>. To print the ten lines following the current line: <code>+10p</code>.
+<strong>Qed</strong> also lets you leave out the offset, in which case it supplies the
+number <code>1</code>. Thus the address expression <code>+</code> by itself is
 equivalent to <code>.+1</code> (<em>i.e.</em> the next line on from <em>dot</em>), and <code>-</code> is
 equivalent to <code>.-1</code> (<em>i.e.</em> the line prior to <em>dot</em>).</p>
 </div>
@@ -563,7 +563,7 @@ the immediate context of the current line: <code>-,+p</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-03 09:33:36 UTC
+Last updated 2024-10-23 17:13:29 +0100
 </div>
 </div>
 </body>

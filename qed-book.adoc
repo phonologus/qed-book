@@ -2749,7 +2749,7 @@ with _troff_ code!
 
 === History
 
-Originally written by *Robert Pike* at U. of T. in 1992.
+Originally written by *Robert Pike* in 1980.
 
 Converted to `asciidoc`, edited,
 and updated by _Sean Jensen_ in February 2021.
@@ -2759,6 +2759,8 @@ and updated by _Sean Jensen_ in February 2021.
 Rob Pike's original U. of T. Qed tarball:
 <https://github.com/arnoldrobbins/qed-archive/unix-1992>
 
-Sean Jensen's port of Qed, including this tutorial:
-<https://github.com/phonologus/QED>
+Sean Jensen's port of Qed:
+<https://github.com/phonologus/qed-new>
 
+This version of the tutorial:
+<https://github.com/phonologus/qed-book>
