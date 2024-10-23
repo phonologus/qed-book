@@ -1,5 +1,5 @@
 .SUFFIXES: .adoc .html .pdf
-.PHONY: all all-html all-pdf clean
+.PHONY: all all-html all-pdf clean git
 
 .adoc.html:
 	asciidoctor $<
@@ -15,4 +15,7 @@ all-pdf: qed-book.pdf basics.pdf
 
 clean:
 	rm -f *.html *.pdf
+
+git: all-html
+	fossil git export
 
